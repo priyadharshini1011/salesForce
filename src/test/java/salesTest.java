@@ -37,15 +37,15 @@ public class salesTest {
 	public static WebDriver driver;
 	public static ExtentReports reports;
 	public static ExtentTest logger;
-
+/*
 public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
 		setupDriver();
 	
-		TC01_loginErrorMessage();
+		//TC01_loginErrorMessage();
 		//TC02_LoginToSalesForce() ;
-		//TC03_CheckRemeberMe();
+		TC03_CheckRemeberMe();
 		//TC4A_ForgotPassword();
 		//TC4B_ForgotPassword();
 		//TC05_UserMenuDropDown();
@@ -75,8 +75,21 @@ public static void main(String[] args) throws Exception {
 		//TC29_ViewContact();
 		
 		closing();
+	}*/
+	@BeforeMethod
+	private static void setupDriver() {
+		// TODO Auto-generated method stub
+		reports = new ExtentReports("C:\\Users\\auhum\\Desktop\\ExtendReport\\Login123.html");
+		logger = reports.startTest("SalesForce");
+		
+		System.setProperty("webdriver.chrome.driver","C:\\jar\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.salesforce.com");
+		logger.log(LogStatus.PASS, "got the URL");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(50,TimeUnit.SECONDS);
 	}
-	//@Test(priority=21)
+	@Test(priority=21)
 	private static void TC21leadsSelectView() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC21leadsSelectView");
@@ -121,11 +134,11 @@ public static void main(String[] args) throws Exception {
 			}else {
 				System.out.println("Pass");
 			}
-		}
-		logger.log(LogStatus.PASS, "Leads dropdoen listed");	*/
+		}*/
+		logger.log(LogStatus.PASS, "Leads dropdoen listed");	
 		
 	}
-//	@Test(priority = 20)
+@Test(priority = 20)
 	private static void TC20leadsTab() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC20leadsTab");
@@ -152,7 +165,7 @@ public static void main(String[] args) throws Exception {
 		leads.click();
 		logger.log(LogStatus.PASS, "Clicked leads");
 	}
-	//@Test(priority=19)
+	@Test(priority=19)
 	private static void TC19TestQuarterlySummaryReport() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC19TestQuarterlySummaryReport");
@@ -202,7 +215,7 @@ public static void main(String[] args) throws Exception {
 		}
 		logger.log(LogStatus.PASS, "Report ran successfully ");
 	}
-	//@Test(priority=18)
+	@Test(priority=18)
 	private static void TC18StuckOpportunitiesReport() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC18StuckOpportunitiesReport");
@@ -231,7 +244,7 @@ public static void main(String[] args) throws Exception {
 		WebElement stuckClick = driver.findElement(By.xpath("//*[@id=\"toolsContent\"]/tbody/tr/td[1]/div/div[1]/div[1]/ul/li[2]/a"));
 		stuckClick.click();
 		logger.log(LogStatus.PASS, "Pressed stuckopportunities");
-		List<WebElement> rows = driver.findElements(By.xpath("//*[@id='fchArea']/table/tbody/tr"));
+		/*List<WebElement> rows = driver.findElements(By.xpath("//*[@id='fchArea']/table/tbody/tr"));
 		for(WebElement row : rows) {
 		List<WebElement> column = row.findElements(By.tagName("th"));
 		if(column.isEmpty()) {
@@ -243,9 +256,9 @@ public static void main(String[] args) throws Exception {
 		}
 		System.out.println();
 	}
-		logger.log(LogStatus.PASS, "stuckopportunities report");
+		logger.log(LogStatus.PASS, "stuckopportunities report");*/
 	}
-//	@Test(priority=17)
+@Test(priority=17)
 	private static void TC17TestOpportunityPipelineReport() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC17TestOpportunityPipelineReport");
@@ -274,7 +287,7 @@ public static void main(String[] args) throws Exception {
 		WebElement pipelineClick = driver.findElement(By.xpath("//*[@id=\"toolsContent\"]/tbody/tr/td[1]/div/div[1]/div[1]/ul/li[1]/a"));
 		pipelineClick.click();
 		logger.log(LogStatus.PASS, "pipeline clicked");	
-		List<WebElement> rows = driver.findElements(By.xpath("//*[@id='fchArea']/table/tbody/tr"));
+		/*List<WebElement> rows = driver.findElements(By.xpath("//*[@id='fchArea']/table/tbody/tr"));
 		
 		for (WebElement row : rows) {
 List<WebElement> columns = row.findElements(By.tagName("th")); // find header in the row
@@ -286,9 +299,9 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 				System.out.print("|");
 			}
 			System.out.println();
-		} 
+		} */
 	}
-	//@Test(priority=16)
+@Test(priority=16)
 	private static void TC16CreateNewOpty() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC16CreateNewOpty");
@@ -343,7 +356,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		logger.log(LogStatus.PASS, "Created new Opportunities");
 		
 	}
-//	@Test(priority=15)
+@Test(priority=15)
 	private static void TC15OpportunitiesDropDown() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC15OpportunitiesDropDown");
@@ -379,7 +392,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 	         }
 	      logger.log(LogStatus.PASS, "opportunities drop down listed ");
 	}
-	//@Test(priority=24)
+	@Test(priority=14)
 	private static void TC14CreateAccountReport() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC14CreateAccountReport");
@@ -412,7 +425,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		logger.log(LogStatus.PASS, "Account last Activity button clicked");
 		WebElement fromDate = driver.findElement(By.xpath("//*[@id='ext-comp-1042']"));
 		fromDate.clear();
-		fromDate.sendKeys("11/4/2019");
+		fromDate.sendKeys("12/4/2019");
 		//WebElement todaDate = driver.findElement(By.xpath(prop.getProperty("toDay")));
 		//todaDate.click();
 		/*WebElement date = driver.findElement(By.xpath(prop.getProperty("date")));
@@ -422,7 +435,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		todaydate.click();*/
 		WebElement toDate = driver.findElement(By.xpath("//*[@id='ext-comp-1045']"));
 		toDate.clear();
-		toDate.sendKeys("11/4/2019");
+		toDate.sendKeys("12/4/2019");
 		///WebElement From_date = driver.findElement(By.xpath("//img[@id='ext-gen152']"));
 		//From_date.click();
 		//WebElement From_Today_Date = driver.findElement(By.xpath("//table[@id='ext-comp-1112']//em"));
@@ -480,7 +493,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 			}
 			return readData;
 			}
-	//@Test(priority=1)
+	@Test(priority=1)
 private static void TC01_loginErrorMessage() throws Exception {
 		
 		logger = reports.startTest("Login Error");
@@ -513,7 +526,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		
 		
 	}
-	//@Test(priority=29)
+	@Test(priority=29)
 	private static void TC29_ViewContact() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC29_ViewContact");
@@ -553,7 +566,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	
 
 
-	//@Test(priority=28)
+	@Test(priority=28)
 	private static void TC28_MyContactsView() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC28_MyContactsView");
@@ -590,7 +603,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	}
 
 
-	//@Test(priority=27)
+@Test(priority=27)
 	private static void TC27_CheckRecentlyCreated() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC27_CheckRecentlyCreated");
@@ -625,7 +638,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	}
 
 
-	//@Test(priority=13)
+	@Test(priority=13)
 	private static void TC13_MergeAccounts() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC13_MergeAccounts");
@@ -671,7 +684,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		logger.log(LogStatus.INFO, "alert closed ");
 	}
 
-//	@Test(priority=12)
+@Test(priority=12)
 
 	private static void TC12_Editview() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
@@ -700,7 +713,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		Thread.sleep(5000);
 		WebElement view = driver.findElement(By.xpath("//select[@id='fcf']"));
 		Select optionView = new Select(view);
-		optionView.selectByVisibleText("apple");
+		optionView.selectByVisibleText("d");
 		System.out.println("selected");	
 		logger.log(LogStatus.INFO, "account name selected from view option ");
 		Thread.sleep(5000);
@@ -736,7 +749,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	}
 
 
-	//@Test(priority=11)
+	@Test(priority=11)
 	private static void TC11_Createnewview() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC11_Createnewview");
@@ -779,7 +792,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	}
 
 
-	//@Test(priority=26)
+	@Test(priority=26)
 	private static void TC26_CreateContactNewView() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC26_CreateNewView");
@@ -817,12 +830,13 @@ private static void TC01_loginErrorMessage() throws Exception {
 		WebElement saveView = driver.findElement(By.xpath("//div[@class='pbHeader']//input[@name='save']"));
 		saveView.click();
 		logger.log(LogStatus.PASS, "New View Created");
+			
 		
 	}
 	
 
 
-	//@Test(priority=25)
+	@Test(priority=25)
 	private static void TC25_CreateNewContact() throws IOException {
 
 				logger = reports.startTest("TC25_CreateNewContact");
@@ -859,12 +873,23 @@ private static void TC01_loginErrorMessage() throws Exception {
 				logger.log(LogStatus.INFO, "account name  entered");
 				WebElement saveContacts = driver.findElement(By.xpath("//td[@id='topButtonRow']//input[@name='save']"));
 				saveContacts.click();
+				WebElement  contactName = driver.findElement(By.xpath("//h2[contains(@class,'topName')]"));
+				String a1 = contactName.getText();
+				String a2 = "priya";
+				if(a1.equals(a2))
+				{
+					logger.log(LogStatus.PASS, "Test Case Pass");
+				}
+				else
+				{
+					logger.log(LogStatus.FAIL, "Test Case Fail");
+				}  
 				logger.log(LogStatus.PASS, "contact created");
 				
 	}
 
 
-	//@Test(priority=24)
+	@Test(priority=24)
 	private static void TC24_newButtonLeadsHome() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC24_newButtonLeadsHome");
@@ -902,12 +927,23 @@ private static void TC01_loginErrorMessage() throws Exception {
 		logger.log(LogStatus.INFO, "entered company name ");
 		WebElement saveLead = driver.findElement(By.xpath("//td[@id='topButtonRow']//input[@name='save']"));
 		saveLead.click();
+		WebElement  leadName = driver.findElement(By.xpath("//h2[@class='topName']"));
+		String a1 = leadName.getText();
+		String a2 = "demo";
+		if(a1.equals(a2))
+		{
+			logger.log(LogStatus.PASS, "Test Case Pass");
+		}
+		else
+		{
+			logger.log(LogStatus.FAIL, "Test Case Fail");
+		}  
 		logger.log(LogStatus.PASS, "new lead created");
 		
 	}
 
 
-	//@Test(priority=23)
+	@Test(priority=23)
 	private static void TC23_ListItemTodaysLeads() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC23_ListItemTodaysLeads");
@@ -951,7 +987,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	}
 
 
-	//@Test(priority=22)
+	@Test(priority=22)
 	private static void TC22_defaultView() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC22_defaultView");
@@ -1012,19 +1048,24 @@ private static void TC01_loginErrorMessage() throws Exception {
 			WebElement leads1 = driver.findElement(By.xpath("//*[@id='Lead_Tab']/a"));
 			leads1.click();
 			logger.log(LogStatus.INFO, "Clicked leads");
-			WebElement leadDrop1 = driver.findElement(By.xpath("//*[@id='fcf']"));
+			/*WebElement leadDrop1 = driver.findElement(By.xpath("//*[@id='fcf']"));
 			//leadDrop.click();
 			//logger.log(LogStatus.PASS, "Clicked leads");
 			Select dropDownLead1 = new Select(leadDrop1);
-			dropDownLead1.selectByIndex(3);
+			dropDownLead1.selectByIndex(3);*/
 			WebElement goLead = driver.findElement(By.xpath("//*[@id='filter_element']/div/span/span[1]/input"));
 			goLead.click();
+			WebElement TodayLead = driver.findElement(By.xpath("//*[@id='is:islv:inlineSchedulerListView:enhancedList_listSelect']"));
+			Boolean leadPage = TodayLead.isDisplayed();
+			if (leadPage == true) {
+				System.out.println("lead page is displayed");
+				}
 			logger.log(LogStatus.PASS, "TestCase Passed");
 
 	}
 
 
-	//@Test(priority=10)
+	@Test(priority=10)
 	private static void TC10_CreateAccount() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC10_CreateAccount");
@@ -1061,7 +1102,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		WebElement actualAccount = driver.findElement(By.xpath("//*[@id=\"contactHeaderRow\"]/div[2]/h2"));
 		String actualUsername = actualAccount.getText();
 		System.out.println(actualUsername);
-		String expectedUsername = "acc3";
+		String expectedUsername = "acc4";
 		if(actualUsername.equals(expectedUsername)) {
 			System.out.println("pass");}
 		else {
@@ -1070,7 +1111,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		//Assert.assertEquals(actualUsername, expectedUsername);
 		logger.log(LogStatus.PASS, "UserNAme Found");
 	}
-	//@Test(priority=9)
+@Test(priority=9)
 	private static void TC09_Logout() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC09_Logout");
@@ -1104,7 +1145,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		logger.log(LogStatus.PASS, "Logged out");
 		Thread.sleep(5000);
 	}
-	//@Test(priority=8)
+	@Test(priority=8)
 	private static void TC08_DevelopersConsole() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC08_DevelopersConsole");
@@ -1147,7 +1188,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		
 		
 	}
-	//@Test(priority=7)
+	@Test(priority=7)
 	private static void TC07_MySettingsUserMenu() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC07_MySettingsUserMenu");
@@ -1217,7 +1258,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 	
 		
 	}
-	//@Test(priority=6)
+	@Test(priority=6)
 	private static void TC06_MyProfileUserMenu() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC06_MyProfileUserMenu");
@@ -1272,7 +1313,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		Thread.sleep(5000);
 		driver.switchTo().defaultContent();
 		logger.log(LogStatus.INFO, "switched to default");
-	
+		Thread.sleep(5000);
 		WebElement post = driver.findElement(By.xpath("//span[contains(@class,'publisherattachtext')][contains(text(),'Post')]"));
 		post.click();
 		logger.log(LogStatus.INFO, "clicked post");
@@ -1326,7 +1367,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 
 		
 	}
-	//@Test(priority=5)
+	@Test(priority=5)
 	private static void TC05_UserMenuDropDown() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC05_UserMenuDropDown");
@@ -1358,8 +1399,9 @@ private static void TC01_loginErrorMessage() throws Exception {
 		for(int i=0;i<options.size();i++)
 		{
 			boolean s= false;
+			
 			for(int j=0;j<a.length;j++) {
-				System.out.println(options.get(i).getAttribute("title"));
+				//System.out.println(options.get(i).getAttribute("title"));
 				if(a[j].equals(options.get(i).getAttribute("title"))) {
 					s=true;
 					break;
@@ -1413,7 +1455,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		logger.log(LogStatus.PASS, "testcase passed");
 	}
 		
-	//@Test(priority=4)
+	@Test(priority=4)
 	private static void TC4A_ForgotPassword() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC4A_ForgotPassword");
@@ -1440,7 +1482,34 @@ private static void TC01_loginErrorMessage() throws Exception {
 		System.out.println(errormsg1.getText());
 		logger.log(LogStatus.PASS, "Got Error Message");
 	}
-	//@Test(priority=3)
+
+		
+	@Test (priority=2)
+	private static void TC02_LoginToSalesForce() throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		logger = reports.startTest("TC02_LoginToSalesForce");
+
+		String [][] recData = getDataInput("C:\\Users\\auhum\\Desktop\\SalesForceFinal","TC02_LoginToSalesForce.xls","Sheet1");
+		WebElement login = driver.findElement(By.xpath("//a[@class = 'dropdown-toggle disabled'][contains(text(),'Login')]"));
+		login.click();
+		logger.log(LogStatus.PASS, "Pressed Login");
+		
+		WebElement input = driver.findElement(By.xpath("//input[@id='username']"));
+		input.sendKeys(recData[1][2]);
+		logger.log(LogStatus.PASS, "Input userid");
+		WebElement Password = driver.findElement(By.xpath("//input[@type='password']"));
+		Password.clear();
+		Password.sendKeys(recData[1][3]);
+		logger.log(LogStatus.PASS, "Cleared Password");
+	
+		WebElement Login = driver.findElement(By.xpath("//input[@name='Login']"));
+		Login.click();
+		Thread.sleep(7000);
+		logger.log(LogStatus.PASS, "login success ");
+		
+		
+	}
+	@Test(priority=3)
 	private static void TC03_CheckRemeberMe() throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("rememberMe");
@@ -1478,59 +1547,25 @@ private static void TC01_loginErrorMessage() throws Exception {
 		
 		logger.log(LogStatus.PASS, "Logged out");
 			Thread.sleep(5000);
-			WebElement userFeild = driver.findElement(By.xpath("//input[@value='priyadharshini.dp.1011-r7ah@force.com']"));
+			WebElement userFeild = driver.findElement(By.xpath("//input[@value='priyadharshini.1011-modh@force.com']"));
 			String actualUsername = userFeild.getAttribute("value");
 			System.out.println(actualUsername);
-			String expectedUsername = "priyadharshini.dp.1011-r7ah@force.com";
+			String expectedUsername = "priyadharshini.1011-modh@force.com";
 			Assert.assertEquals(actualUsername, expectedUsername);
 			logger.log(LogStatus.PASS, "UserNAme Found");
+			
 		}
-		
-	@Test(priority=2)
-	private static void TC02_LoginToSalesForce() throws IOException {
-		// TODO Auto-generated method stub
-		logger = reports.startTest("TC02_LoginToSalesForce");
 
-		String [][] recData = getDataInput("C:\\Users\\auhum\\Desktop\\SalesForceFinal","TC02_LoginToSalesForce.xls","Sheet1");
-		WebElement login = driver.findElement(By.xpath("//a[@class = 'dropdown-toggle disabled'][contains(text(),'Login')]"));
-		login.click();
-		logger.log(LogStatus.PASS, "Pressed Login");
-		
-		WebElement input = driver.findElement(By.xpath("//input[@id='username']"));
-		input.sendKeys(recData[1][2]);
-		logger.log(LogStatus.PASS, "Input userid");
-		WebElement Password = driver.findElement(By.xpath("//input[@type='password']"));
-		Password.clear();
-		Password.sendKeys(recData[1][3]);
-		logger.log(LogStatus.PASS, "Cleared Password");
 	
-		WebElement Login = driver.findElement(By.xpath("//input[@name='Login']"));
-		Login.click();
-		
-		logger.log(LogStatus.PASS, "login success ");
-		
-	}
-	@BeforeClass
-	private static void setupDriver() {
-		// TODO Auto-generated method stub
-		reports = new ExtentReports("C:\\Users\\auhum\\Desktop\\ExtendReport\\Login123.html");
-		logger = reports.startTest("SalesForce");
-		
-		System.setProperty("webdriver.chrome.driver","C:\\jar\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("https://www.salesforce.com");
-		logger.log(LogStatus.PASS, "got the URL");
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(50,TimeUnit.SECONDS);
-	}
-	@AfterClass
-	private static  void closing() {
+	@AfterMethod
+	private static  void closing() throws InterruptedException {
 		logger = reports.startTest("Closing Browser");
 		logger.log(LogStatus.PASS, "Closing");
 		reports.endTest(logger);
 		reports.flush();
 		
 		driver.quit();
+		//Thread.sleep(7000);
 	}
 	}
 
