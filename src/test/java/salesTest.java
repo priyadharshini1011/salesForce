@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -79,7 +81,11 @@ public static void main(String[] args) throws Exception {
 	@BeforeMethod
 	private static void setupDriver() {
 		// TODO Auto-generated method stub
-		reports = new ExtentReports("C:\\Users\\auhum\\Desktop\\ExtendReport\\Login123.html");
+		SimpleDateFormat simpledateformatter = new SimpleDateFormat("'sampledemo_'yyyyMMddHHmm'.html'");
+		Date currentDate =new Date();
+		String filename = simpledateformatter.format(currentDate);
+		String path = "C:\\Users\\auhum\\Desktop\\ExtendReport\\"+filename;
+		reports = new ExtentReports(path);
 		logger = reports.startTest("SalesForce");
 		
 		System.setProperty("webdriver.chrome.driver","C:\\jar\\chromedriver.exe");
@@ -393,7 +399,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 	      logger.log(LogStatus.PASS, "opportunities drop down listed ");
 	}
 	@Test(priority=14)
-	private static void TC14CreateAccountReport() throws IOException {
+	private static void TC14CreateAccountReport() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC14CreateAccountReport");
 
@@ -404,7 +410,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		
 		WebElement input = driver.findElement(By.xpath("//input[@id='username']"));
 		input.sendKeys(recData[1][2]);
-		logger.log(LogStatus.INFO, "Pressed Login and entered details");
+		logger.log(LogStatus.INFO, "Pressed Login and entered details"); 
 		WebElement Password = driver.findElement(By.xpath("//input[@type='password']"));
 		Password.clear();
 		Password.sendKeys(recData[1][3]);
@@ -425,7 +431,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		logger.log(LogStatus.PASS, "Account last Activity button clicked");
 		WebElement fromDate = driver.findElement(By.xpath("//*[@id='ext-comp-1042']"));
 		fromDate.clear();
-		fromDate.sendKeys("12/4/2019");
+		fromDate.sendKeys("12/5/2019");
 		//WebElement todaDate = driver.findElement(By.xpath(prop.getProperty("toDay")));
 		//todaDate.click();
 		/*WebElement date = driver.findElement(By.xpath(prop.getProperty("date")));
@@ -435,7 +441,7 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		todaydate.click();*/
 		WebElement toDate = driver.findElement(By.xpath("//*[@id='ext-comp-1045']"));
 		toDate.clear();
-		toDate.sendKeys("12/4/2019");
+		toDate.sendKeys("12/5/2019");
 		///WebElement From_date = driver.findElement(By.xpath("//img[@id='ext-gen152']"));
 		//From_date.click();
 		//WebElement From_Today_Date = driver.findElement(By.xpath("//table[@id='ext-comp-1112']//em"));
@@ -456,7 +462,8 @@ List<WebElement> columns = row.findElements(By.tagName("th")); // find header in
 		reportName.sendKeys(recData[1][4]);
 		WebElement reportUniqueName = driver.findElement(By.xpath("//*[@id='saveReportDlg_DeveloperName']"));
 		reportUniqueName.click();
-		WebElement saveRep = driver.findElement(By.xpath("//*[@id='ext-gen268'][contains(text(),'Save and Run Report')]"));
+		Thread.sleep(5000);
+		WebElement saveRep = driver.findElement(By.xpath("//*[@id=\"dlgSaveAndRun\"]/tbody/tr[2]/td[2]/em"));
 		saveRep.click();
 		logger.log(LogStatus.PASS, "report run and saved");
 	} 
@@ -567,7 +574,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 
 
 	@Test(priority=28)
-	private static void TC28_MyContactsView() throws IOException {
+	private static void TC28_MyContactsView() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC28_MyContactsView");
 		String [][] recData = getDataInput("C:\\Users\\auhum\\Desktop\\SalesForceFinal","TC28_MyContactsView.xls","Sheet1");
@@ -597,6 +604,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		
 		Select dropDown = new Select(contactsDropDowwn);
 		dropDown.selectByVisibleText("My Contacts");
+		Thread.sleep(5000);
 		WebElement contactsGo = driver.findElement(By.xpath("//*[@id='filter_element']/div/span/span[1]/input"));
 		contactsGo.click();
 		logger.log(LogStatus.PASS, "MyContact Selected ");
@@ -639,7 +647,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 
 
 	@Test(priority=13)
-	private static void TC13_MergeAccounts() throws IOException {
+	private static void TC13_MergeAccounts() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC13_MergeAccounts");
 		String [][] recData = getDataInput("C:\\Users\\auhum\\Desktop\\SalesForceFinal","TC13_MergeAccounts.xls","Sheet1");
@@ -675,6 +683,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		WebElement nextClick = driver.findElement(By.xpath("//div[@class='pbBottomButtons']//input[@name='goNext']"));
 		nextClick.click();
 		logger.log(LogStatus.INFO,"next step is clicked ");
+		Thread.sleep(5000);
 		WebElement mergeClick = driver.findElement(By.xpath("//div[@class='pbBottomButtons']//input[@name='save']"));
 		mergeClick.click();
 		Alert SwitchALert = driver.switchTo().alert();
@@ -713,7 +722,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		Thread.sleep(5000);
 		WebElement view = driver.findElement(By.xpath("//select[@id='fcf']"));
 		Select optionView = new Select(view);
-		optionView.selectByVisibleText("d");
+		optionView.selectByVisibleText("All Account");
 		System.out.println("selected");	
 		logger.log(LogStatus.INFO, "account name selected from view option ");
 		Thread.sleep(5000);
@@ -875,7 +884,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 				saveContacts.click();
 				WebElement  contactName = driver.findElement(By.xpath("//h2[contains(@class,'topName')]"));
 				String a1 = contactName.getText();
-				String a2 = "priya";
+				String a2 = "priya1234";
 				if(a1.equals(a2))
 				{
 					logger.log(LogStatus.PASS, "Test Case Pass");
@@ -929,7 +938,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		saveLead.click();
 		WebElement  leadName = driver.findElement(By.xpath("//h2[@class='topName']"));
 		String a1 = leadName.getText();
-		String a2 = "demo";
+		String a2 = "radhadha1";
 		if(a1.equals(a2))
 		{
 			logger.log(LogStatus.PASS, "Test Case Pass");
@@ -1102,7 +1111,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		WebElement actualAccount = driver.findElement(By.xpath("//*[@id=\"contactHeaderRow\"]/div[2]/h2"));
 		String actualUsername = actualAccount.getText();
 		System.out.println(actualUsername);
-		String expectedUsername = "acc4";
+		String expectedUsername = "acc8";
 		if(actualUsername.equals(expectedUsername)) {
 			System.out.println("pass");}
 		else {
@@ -1422,7 +1431,7 @@ private static void TC01_loginErrorMessage() throws Exception {
 		
 		
 		
-	//@Test(priority=4)
+	@Test(priority=4)
 	private static void TC4B_ForgotPassword() throws IOException {
 		// TODO Auto-generated method stub
 		logger = reports.startTest("TC4B_ForgotPassword");
